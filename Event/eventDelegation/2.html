@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0 auto;
+      }
+      .btn {
+        padding: 20px 40px;
+        border-radius: 10px;
+        margin-left: 10px;
+        border: none;
+        color: white;
+        font-size: 2em;
+      }
+      .btn-primary {
+        background-color: turquoise;
+      }
+      .btn-secondary {
+        background-color: violet;
+      }
+      .btn-danger {
+        background-color: tomato;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu">
+      <button data-action="save" class="btn btn-primary">Save</button>
+      <button data-action="load" class="btn btn-secondary">Load</button>
+      <button data-action="search" class="btn btn-danger">Search</button>
+    </div>
+    <script>
+      class Menu {
+        constructor(elem) {
+          this._elem = elem;
+          elem.onclick = this.onClick.bind(this);
+        }
+        save() {
+          alert(`saving`);
+        }
+        load() {
+          alert(`loading`);
+        }
+        search() {
+          alert(`searching`);
+        }
+        onClick(event) {
+          let action = event.target.dataset.action;
+          if (action) {
+            this[action]();
+          }
+        }
+      }
+      let menu = document.querySelectorAll(".menu")[0];
+      new Menu(menu);
+    </script>
+  </body>
+</html>

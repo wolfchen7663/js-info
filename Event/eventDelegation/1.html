@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        /* border: 1px solid black; */
+        border-collapse: collapse;
+      }
+      td {
+        padding: 20px;
+        border: 3px solid blue;
+        background-color: rgba(111, 233, 155, 0.8);
+        font-size: 3em;
+        cursor: pointer;
+      }
+
+      td.clicked {
+        background-color: tomato;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3">BA GUA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      let container = document.querySelectorAll("table")[0];
+      let selectedTd;
+      container.addEventListener("click", (event) => {
+        let td = event.target.closest("td");
+        if (!td) return;
+        if (!container.contains(td)) return;
+        highlight(td);
+      });
+      function highlight(td) {
+        if (selectedTd) {
+          selectedTd.classList.remove("clicked");
+        }
+        selectedTd = td;
+        selectedTd.classList.add("clicked");
+      }
+
+      /*     
+      Explanations:
+1. The method elem.closest(selector) returns the nearest ancestor that matches the selector. 
+In our case we look for <td> on the way up from the source element.
+2. If event.target is not inside any <td>, then the call returns immediately, 
+as there’s nothing to do.
+3.In case of nested tables, event.target may be a <td>, 
+but lying outside of the current table. So we check if that’s actually our table’s <td>.
+4. And, if it’s so, then highlight it.
+          
+      */
+    </script>
+  </body>
+</html>
