@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stop the bubble</title>
+</head>
+<body>
+    <div onclick="alert(`the bubbling doesn't reach here`)">div div
+        <button onclick="event.stopPropagation()">Click Me</button>
+    </div>
+
+    <!-- There’s usually no real need to prevent the bubbling -->
+</body>
+</html>
