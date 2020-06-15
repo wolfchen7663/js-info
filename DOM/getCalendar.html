@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="calendar"></div>
+    <script>
+        "use strict";
+        function createCalendar(elem, year, month) {
+            let mon = month - 1;
+            let d = new Date(year, mon);
+
+            let table = "<table><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>";
+            // 没到的地方 用空的td来代替
+            for(let i = 0; i < getWeekday(d); i++) {
+                table+="<td></td>";
+            }
+
+            while(d.getMonth() == mon) {
+                table+= "<td>" + d.getDate()+ "</td>";
+                if(getWeekday(d)%7 == 6) {
+                    table+= "<tr></tr>";
+                }
+                d.setDate(d.getDate()+1);
+            }
+
+            if(getWeekday(d)!=0) {
+                table+="<td></td>";
+            }
+
+            table+="</tr></table>";
+            elem.innerHTML = table;
+        }
+        // 转换星期，与日历要求默认一致
+        function getWeekday(date) {
+            let weekday = date.getDay();
+            if(weekday == 0) {
+                weekday = 7;
+            }
+            return weekday - 1;
+        }
+
+        let calendar = document.querySelector(".calendar");
+        createCalendar(calendar, 2020, 6);
+    </script>
+</body>
+</html>

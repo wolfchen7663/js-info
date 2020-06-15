@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        let phrase = "Hello";
+        if (true) {
+            let name = "John";
+            function sayHi() {
+                console.log(`${phrase}, ${name}`);
+            }
+        }
+        sayHi(); //error
+        // if 是一个块状作用域，全局里面得不到sayHi;
+    </script>
+</body>
+</html>

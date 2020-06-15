@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      function makeArmy() {
+        let shooters = [];
+        let i = 0;
+        while (i < 10) {
+          let shooter = function () {
+            console.log(i);
+          };
+          shooters.push(shooter);
+          i++;
+        }
+        return shooters;
+      }
+
+      let army = makeArmy();
+      army[0](); // 10` 不符合预期
+      army[5](); // 10 不符合预期
+
+      // 修改后的版本1
+      function makeArmy1() {
+        let shooters = [];
+        let i = 0;
+        while (i < 10) {
+          let j = i;
+          let shooter = function () {
+            console.log(j);
+          };
+          shooters.push(shooter);
+          i++;
+        }
+        return shooters;
+      }
+
+      let army1 = makeArmy1();
+      army1[0](); // 0
+      army1[5](); // 1
+
+      // 修改后的版本2
+      function makeArmy2() {
+        let shooters = [];
+        for (let i = 0; i < 10; i++) {
+          let shooter = function () {
+            console.log(i);
+          };
+          shooters.push(shooter);
+        }
+        return shooters;
+      }
+      let army2 = makeArmy2();
+      army2[0](); // 0
+      army2[5](); // 5
+    </script>
+  </body>
+</html>

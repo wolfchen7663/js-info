@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        Function.prototype.defer = function (ms) {
+            setTimeout(this, ms);// 注意这里this的妙用
+        }
+        function f() {
+            console.log(`i am ok`);
+        }
+        f.defer(1000);
+    </script>
+</body>
+</html>

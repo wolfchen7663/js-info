@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let urls = [
+        "https://api.github.com/users/chen",
+        "https://api.github.com/users/wei",
+        "https://api.github.com/users/ji",
+      ];
+      // 将每个 url 映射（map）到 fetch 的 promise 中
+      let requests = urls.map((url) => fetch(url));
+      // Promise.all 等待所有任务都 resolved
+      Promise.all(requests).then((responses) =>
+        responses.forEach((response) =>
+          console.log(`${response.url}: ${response.status}`)
+        )
+      );
+    </script>
+  </body>
+</html>

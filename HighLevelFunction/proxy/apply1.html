@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      function delay(f, ms) {
+        return new Proxy(f, {
+          apply(target, thisArgs, args) {
+            setTimeout(() => {
+              target.apply(thisArgs, args);
+            }, ms);
+          },
+        });
+      }
+
+      function sayHi(user) {
+        console.log(`hello ${user}`);
+      }
+
+      sayHi = delay(sayHi, 3000);
+      console.log(sayHi.length);
+      sayHi("John");
+    </script>
+  </body>
+</html>

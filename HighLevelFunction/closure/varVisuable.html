@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let i = 0;
+      function show() {
+        // 引擎从函数开始就知道局部变量 x，
+        // 但是变量 x 一直处于“未初始化”（无法使用）的状态，直到结束 let（“死区”）
+        // 因此答案是 error
+
+        console.log(i);
+        let i = 1; // 不会提升
+      }
+      show(); // Uncaught ReferenceError: Cannot access 'i' before initialization
+    </script>
+  </body>
+</html>

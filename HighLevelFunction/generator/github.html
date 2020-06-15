@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      async function* fetchCommits(repo) {
+        let url = `https://api.github.com/repo/${repo}/commits`;
+        while (url) {
+          const response = await fetch(url, {
+            headers: { "User-Agent": "Our script" },
+          });
+          const body = await response.json();
+
+          let nextPage = response.headers
+            .get("Link")
+            .match(/<(.*?)>; rel="next"/);
+          nextPage = nextPage && nextPage[1];
+          url = nextPage;
+          for (let commit of body) {
+            yield commit;
+          }
+        }
+      }
+      (async () => {
+        let count = 0;
+        for await (const commit of fetchCommits(
+          "javascript-tutorial/en.javascript.info"
+        )) {
+          console.log(commit.author.login);
+          if (++count == 100) {
+            break;
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

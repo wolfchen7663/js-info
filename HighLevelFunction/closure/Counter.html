@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+              function Counter() {
+                  let count = 0;
+                  this.up = function () {
+                      return ++count;
+                  }
+                  this.down = function () {
+                      return --count;
+                  }
+              }
+
+              let count = new Counter();
+              console.log(count.up()); // 1
+              console.log(count.up()); // 2
+              console.log(count.down()); // 1
+
+              let count1 = new Counter();
+              console.log(count1.up()); // 1
+              console.log(count1.up()); // 2
+              console.log(count1.down()); // 1
+    </script>
+  </body>
+</html>

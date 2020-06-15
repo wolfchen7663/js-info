@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        finally 子句适用于 try..catch 的 任何 出口。这包括显式的 return。
+
+在下面这个例子中，在 try 中有一个 return。在这种情况下，finally 会在控制转向外部代码前被执行。
+        */
+      "use strict";
+      function func() {
+        try {
+          return 1;
+        } catch (error) {
+        } finally {
+          console.log("when have return in try or catch, finally act first, then turn to outer");
+        }
+      }
+      console.log(func()); // 先执行finally 再转到外部
+    </script>
+  </body>
+</html>

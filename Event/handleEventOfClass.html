@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="elem">Click Me</button>
+    <script>
+      "use strict";
+      class Menu {
+        handleEvent(event) {
+          switch (event.type) {
+            case "mousedown":
+              event.currentTarget.innerHTML = "Mouse button pressed";
+            //   console.log(event.currentTarget);
+              break;
+            case "mouseup":
+              event.currentTarget.innerHTML += "...and released.";
+            //   console.log("release");
+              break;
+          }
+        }
+      }
+
+      let button = document.querySelector("#elem");
+      let menu = new Menu();
+      //   button.addEventListener("click", () => console.log("hello"));
+      button.addEventListener("mousedown", menu);
+      button.addEventListener("mouseup", menu);
+    </script>
+  </body>
+</html>

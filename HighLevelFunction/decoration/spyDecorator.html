@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      function work(a, b) {
+        console.log(a + b);
+      }
+
+      function spy(func) {
+        function wrapper(...args) {
+          wrapper.calls = [];
+          wrapper.calls.push(args);
+          return func.apply(this, args);
+        }
+
+        return wrapper;
+      }
+      work = spy(work);
+      console.log(work(1, 2));
+      console.log(work(4, 5));
+    </script>
+  </body>
+</html>

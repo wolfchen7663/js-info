@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="button">Click Me</button>
+    <script>
+      "use strict";
+      class Menu {
+        handleEvent(event) {
+          let method = "on" + event.type[0].toUpperCase() + event.type.slice(1);
+          this[method](event);
+        }
+        onMousedown(event) {
+          event.currentTarget.innerHTML = "Mouse is pressed";
+        }
+        onMouseup(event) {
+          event.currentTarget.innerHTML += "...and released";
+        }
+      }
+      let menu = new Menu();
+      let button = document.querySelector(".button");
+      button.addEventListener("mousedown", menu);
+      button.addEventListener("mouseup", menu);
+    </script>
+  </body>
+</html>

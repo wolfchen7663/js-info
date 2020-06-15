@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        let target = {};
+        let proxy = new Proxy(target, {});
+        proxy.test = 5;
+        console.log(target.test);
+        console.log(proxy.test);
+        for(let key in proxy){
+            console.log(key);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="colorClock.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="clock">
+        <span class="hour">23</span>: <span class="min">41</span>:
+        <span class="sec">12</span>
+      </div>
+      <div class="control">
+        <a href="javascript:;" class="start">Start</a>
+        <a href="javascript:;" class="stop">Stop</a>
+      </div>
+    </div>
+    <script>
+      "use strict";
+      let btnStart = document.querySelector(".start");
+      let btnStop = document.querySelector(".stop");
+      btnStart.addEventListener("click", () => {
+        let timer = setInterval(() => {
+          if (new Date().getSeconds() < 10) {
+            document.querySelector(".sec").innerHTML =
+              `0` + new Date().getSeconds();
+          } else {
+            document.querySelector(".sec").innerHTML = new Date().getSeconds();
+          }
+          if (new Date().getMinutes() < 10) {
+            document.querySelector(".min").innerHTML =
+              `0` + new Date().getMinutes();
+          } else {
+            document.querySelector(".min").innerHTML = new Date().getMinutes();
+          }
+          if (new Date().getHours() < 10) {
+            document.querySelector(".hour").innerHTML =
+              `0` + new Date().getHours();
+          } else {
+            document.querySelector(".hour").innerHTML = new Date().getHours();
+          }
+        }, 1000);
+        btnStop.addEventListener("click", () => {
+          clearInterval(timer);
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      function Rabbit() {}
+      Rabbit.prototype = {
+        eats: true,
+      };
+
+      let rabbit = new Rabbit();
+
+      delete rabbit.eats; // 删除的是rabbit自己的eats
+
+      alert(rabbit.eats); // true 这里依然是从原型继承的
+    </script>
+  </body>
+</html>

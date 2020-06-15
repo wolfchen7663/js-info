@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let worker = {
+        // slow(min, medium, max) {
+        //   console.log(`first callback`);
+        //   //   return args.reduce((total, cur) => (total += cur), 0);
+        //   return min + medium + max;
+        // },
+        slow(...args) {
+          console.log(`another callback`);
+          return args.reduce((t, c) => (t += c), 0);
+        },
+      };
+
+      function cachingDecorator(func, hash) {
+        let cache = new Map();
+        return function () {
+          let key = hash(arguments); // arguments 对象既是可迭代对象又是类数组对象，但它并不是真正的数组。
+          if (cache.has(key)) {
+            return cache.get(key);
+          }
+          let result = func.call(this, ...arguments);
+          cache.set(key, result);
+          return result;
+        };
+      }
+
+      function hash(args) {
+        // return args.reduce((total, cur) => (total += cur), 0);
+        return [].join.apply(args);
+      }
+
+      worker.slow = cachingDecorator(worker.slow, hash);
+      console.log(worker.slow(1, 2, 3));
+      console.log("again" + worker.slow(1, 2, 8, 11, 9));
+    </script>
+  </body>
+</html>

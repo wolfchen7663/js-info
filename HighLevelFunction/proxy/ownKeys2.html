@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let user = {};
+      user = new Proxy(user, {
+        ownKeys(target) {
+          return ["a", "b", "c"];
+        },
+        getOwnPropertyDescriptor(target, prop) {
+          return {
+            enumerable: true,
+            configurable: true,
+          };
+        },
+      });
+
+      console.log(Object.keys(user)); //  ["a", "b", "c"]
+    </script>
+  </body>
+</html>

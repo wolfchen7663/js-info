@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let dictionary = {
+        hello: "ni hao",
+        bye: "bai bai",
+      };
+       // 代理应该在所有地方都完全替代目标对象。目标对象被代理后，任何人都不应该再引用目标对象。否则很容易搞砸。
+      dictionary = new Proxy(dictionary, {
+        get(target, prop) {
+          if (prop in target) {
+            return target[prop];
+          } else {
+            return "default";
+          }
+        },
+      });
+      console.log(dictionary["hello"]);
+      console.log(dictionary["GG"]);
+    </script>
+  </body>
+</html>

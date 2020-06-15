@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let handlers = Symbol("handlers");
+      function makeObservable(target) {
+        // 1 初始化handler存储
+        target[handlers] = [];
+        // 2 将handler 函数存储到数组中， 以便于以后调用
+        target.observe = function (handler) {
+          this[handlers].push(handler);
+        };
+        return new Proxy(target, {
+          set(target, prop, val, receiver) {
+            let success = Reflect.set(target, prop, val, receiver);
+            if (success) {
+              target[handlers].forEach((handler) => handler(prop, val));
+            }
+            return success;
+          },
+        });
+      }
+
+      let user = {};
+      user = makeObservable(user);
+      user.observe((key, value) => {
+        console.log(`SET ${key} = ${value}`);
+      });
+      user.observe(()=>console.log("done"));
+      user.name = "John";
+    </script>
+  </body>
+</html>

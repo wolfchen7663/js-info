@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 编写一个像 sum(a)(b) = a+b 这样工作的 sum 函数。
+      function sum(a) {
+        return function (b) {
+          return a + b;
+        };
+      }
+      sum(1)(2);
+      console.log(sum(1)(2));
+      sum(5)(-1);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 标记这个div以在这显示"name" -->
+    <div data-show-info="name"></div>
+    <!-- 标记这个div以在这显示"age" -->
+    <div data-show-info="age"></div>
+    <script>
+        "use strict";
+        // 这段代码找到带有标记的元素，并显示需要的内容
+        let user = {
+            name: "chen",
+            age: 29,
+        };
+
+        for (let div of document.querySelectorAll("[data-show-info]")) {
+            // 在字段中插入相应的信息
+            let field = div.getAttribute("data-show-info");
+            div.innerHTML = user[field];
+        }
+    </script>
+</body>
+</html>

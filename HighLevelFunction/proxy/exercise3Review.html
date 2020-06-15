@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let handlers = Symbol("handlers");
+      function makeItObservation(target) {
+        target[handlers] = [];
+        target.observe = function (handler) {
+          this[handlers].push(handler);
+        };
+
+        return new Proxy(target, {
+          set(target, prop, val, receiver) {
+            let success = Reflect.set(...arguments);
+            if (success) {
+              target[handlers].forEach((handler) => handler(prop, val));
+            }
+            return success;
+          },
+        });
+      }
+
+      let user = {};
+      user = makeItObservation(user);
+      user.observe((key, value)=>{
+          console.log(`SET ${key} : ${value}`);
+      })
+      user.name = "John";
+    </script>
+  </body>
+</html>

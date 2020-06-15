@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      function localDay(date) {
+        let days = ["emptyDay", "MO", "TU", "WE", "TH", "FR", "SA", "SU"];
+        let day = date.getDay();
+        if (day == 0) {
+          day = 7;
+        }
+        return days[day];
+      }
+      let date = new Date(`2020-5-10`);
+      console.log(localDay(date));
+      */
+
+      
+      // look at the number to know the day
+      // for example: 7 means sunday , 1 means monday
+      function localDay(date) {
+          let day = date.getDay();
+          if (day == 0) {
+              day = 7;
+          }
+          return day;
+      }
+    </script>
+  </body>
+</html>

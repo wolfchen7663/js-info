@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let urls = [
+        "https://api.github.com/users/iliakan",
+        "https://api.github.com/users/remy",
+        "https://no-such-url",
+      ];
+
+      Promise.allSettled(urls.map(fetch(url))).then((results) => {
+        results.forEach((result, num) => {
+          if (result.status == "fulfilled") {
+            console.log(`${urls[num]}: ${result.value.status}`);
+          }
+          if (result.status == "reject") {
+            console.log(`${urls[num]}: ${result.reason}`);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let arr = [1, 2, 3];
+      arr = new Proxy(arr, {
+        get(target, prop, receiver) {
+          if (prop < 0) {
+            // 这里是负数成立
+            prop = target.length + +prop; // 要将下标转化为数值
+            //   console.log(prop);
+          }
+          return Reflect.get(target, prop, receiver);
+        },
+      });
+
+      console.log(arr[-1]);
+      console.log(arr[-2]);
+      console.log(arr[2]);
+    </script>
+  </body>
+</html>

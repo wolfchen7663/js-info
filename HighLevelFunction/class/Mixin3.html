@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let sayMixin = {
+        say(phrase) {
+          console.log(phrase);
+        },
+      };
+      let sayHiMixin = Object.create(sayMixin, {
+        sayHi: {
+          value: function () {
+            super.say(`hello ${this.name}`);
+          },
+        },
+      });
+      //   sayHiMixin.sayHi = ()=>{super.say(`hello ${this.name}`)};
+      //   sayHiMixin.sayBye = ()=>{super.say(`bye ${this.name}`)};
+
+      class User {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+      Object.assign(User.prototype, sayHiMixin);
+      new User("chen").sayBye();
+    </script>
+  </body>
+</html>

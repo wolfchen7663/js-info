@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        function ask(answer, ...handlers) {
+            let isYes = confirm(answer);
+            for (let handler of handlers) {
+                if (handler.length == 0) {
+                    if (isYes) {
+                        handler();
+                    }
+                }else {
+                    handler(isYes);
+                }
+            }
+        }
+
+        ask("question?", ()=>alert("you said yes"), result=>alert(result));
+    </script>
+</body>
+</html>

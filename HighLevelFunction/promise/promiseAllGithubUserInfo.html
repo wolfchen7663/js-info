@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let names = ["chen", "wei"];
+
+      let requests = names.map((name) =>
+        fetch(`https://api.github.com/users/${name}`)
+      );
+
+      Promise.all(requests)
+        .then((responses) => {
+          for (let response of responses) {
+            console.log(`${response.url}: ${response.status}`);
+          }
+          return responses;
+        })
+        .then((responses) => Promise.all(responses.map((r) => r.json())))
+        .then((users) => users.forEach((user) => console.log(user.name)));
+    </script>
+  </body>
+</html>

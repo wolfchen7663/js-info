@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        let range = {
+            start:1,
+            end: 10,
+        };
+
+        range = new Proxy(range, {
+            has(target, prop) {
+                return prop>= target.start && prop<= target.end;
+            }
+        });
+
+        console.log(5 in range);
+        console.log(11 in range);
+    </script>
+</body>
+</html>

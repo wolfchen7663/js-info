@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      let number = +prompt("Enter an integer: ", 10);
+      let result = null;
+      let diff = null;
+      function fib(num) {
+        if (num < 0 || Math.trunc(num) != num) {
+          throw new Error("Not a integer");
+        }
+        return num <= 1 ? num : fib(num - 1) + fib(num - 2);
+      }
+      let start = Date.now();
+      try {
+        result = fib(number);
+      } catch (error) {
+        result = 0;
+      } finally {
+        diff = Date.now() - start;
+      }
+      console.log(`cost ${diff}ms`);
+      console.log(result || `return a error`);
+    </script>
+  </body>
+</html>
